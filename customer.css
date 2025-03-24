@@ -1,0 +1,348 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    background-color: #f8f9fa;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+
+.background-image {
+    background-image: url('hotel-n.jpg');
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    background: white;
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    max-height: 90vh;
+    overflow: auto;
+}
+
+h1, h2 {
+    margin: 5px 0;
+    color: #333;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: border-color 0.2s ease;
+}
+
+input:focus, select:focus, button:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+.button {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.button:hover {
+    transform: scale(1.05);
+    background-color: #218838;
+}
+
+.remove-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.remove-btn:hover {
+    transform: scale(1.05);
+    background-color: #c82333;
+}
+
+.table-container {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 30px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+}
+
+th {
+    background-color: #28a745;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+td, th {
+    border-radius: 6px;
+}
+
+tr:nth-child(even) td {
+    background-color: #f1f1f1;
+}
+
+tr:hover td {
+    background-color: #f0f9f2;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    width: auto;
+    text-align: center;
+}
+
+.popup {
+    background: #343a40;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.popup p {
+    font-size: 18px;
+}
+
+.confirm-button, .cancel-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.confirm-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.cancel-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.confirm-button:hover, .cancel-button:hover {
+    transform: scale(1.05);
+}
+
+.checkmark {
+    font-size: 40px;
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+    
+
+.thank-you-message {
+    font-size: 18px;
+    font-weight: bold;
+    color: green;
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+    background-color: #dff0d8;
+    border: 1px solid #3c763d;
+    border-radius: 5px;
+}
+
+.feedback-stars {
+    display: flex;
+    flex-direction: row;
+    font-size: 40px;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.feedback-btn {
+    background: none;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+    color: gray;
+    transition: color 0.3s;
+}
+
+.feedback-btn.selected {
+    color: gold;
+}
+
+.feedback-checkbox {
+    margin: 5px;
+}
+
+#submitFeedback {
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+}
+
+#submitFeedback:hover {
+    background-color: #218838;
+}
+
+.feedback-stars button:hover {
+    color: #ff9800;
+}
+
+.feedback-reason-btn, .positive-feedback-checkbox {
+    display: block;
+    margin: 10px 0;
+}
+
+.feedback-reason-btn {
+    background-color: #f0f0f0;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.feedback-reason-btn:hover {
+    background-color: #ddd;
+}
+
+.positive-feedback-checkbox {
+    margin-left: 20px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Apply the slide effect when the page loads */
+body {
+    animation: slideIn 0.5s ease-in-out;
+}
+
+/* Slide-in animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.back-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: -30px -20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    position: absolute; /* Position the button to be inside the container */
+    top: 10px;       /* Distance from the top */
+    left: 10px;      /* Distance from the left */
+    width: 100px;   /* Set specific width */
+    height: 40px;  /* Set specific height */
+    font-size: 12px; /* Smaller text */
+    padding: 5px;  /* Reduce padding */
+}
+
+
+.back-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.rating-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.rating-popup .checkmark {
+    font-size: 50px;
+    color: green;
+}
+
+.rating-popup p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptocurrency Payment</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        /* Hover Effect for Container */
+        .container:hover {
+            transform: scale(1.05); /* Increase size on hover */
+            animation: rainbow-border 2s infinite; /* Flashing rainbow colors */
+        }
+        @keyframes rainbow-border {
+            0% { border-color: red; }
+            16% { border-color: orange; }
+            33% { border-color: yellow; }
+            50% { border-color: green; }
+            66% { border-color: blue; }
+            83% { border-color: indigo; }
+            100% { border-color: violet; }
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease; /* Smooth transition for buttons */
+        }
+        button {
+            background-color: #ff9800;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e68900;
+            transform: scale(1.05); /* Increase size on hover */
+        }
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            text-align: center;
+        }
+        .popup-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .popup.success .popup-icon {
+            color: green;
+        }
+        .popup.failure .popup-icon {
+            color: red;
+        }
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%; /* Make the container slightly smaller on small screens */
+                padding: 15px;
+            }
+            h2 {
+                font-size: 1.5em; /* Reduce heading size on small screens */
+            }
+            input, select, button {
+                padding: 10px; /* Increase padding for better touch interaction */
+            }
+        }
+        @media (max-width: 400px) {
+            .container {
+                width: 100%; /* Full width on very small screens */
+                border-radius: 0; /* Remove border radius for full-width effect */
+                border: none; /* Remove border for full-width effect */
+                box-shadow: none; /* Remove shadow for full-width effect */
+            }
+            h2 {
+                font-size: 1.2em; /* Further reduce heading size */
+            }
+            input, select, button {
+                font-size: 14px; /* Adjust font size for better readability */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Cryptocurrency Payment</h2>
+        <form id="cryptoPaymentForm">
+            <label for="cryptoType">Select Cryptocurrency:</label>
+            <select id="cryptoType" name="cryptoType" required>
+                <option value="">Select a cryptocurrency</option>
+                <option value="bitcoin">Bitcoin (BTC)</option>
+                <option value="ethereum">Ethereum (ETH)</option>
+            </select>
+            
+            <label for="walletAddress">Your Wallet Address:</label>
+            <input type="text" id="walletAddress" name="walletAddress" required placeholder="Enter your wallet address">
+            
+            <label for="amount">Amount to Pay:</label>
+            <input type="number" id="amount" name="amount" required min="0.0001" step="0.0001" placeholder="Enter amount">
+            
+            <button type="submit">Pay with Crypto</button>
+        </form>
+    </div>
+
+    <!-- Popup Container -->
+    <div id="popup" class="popup">
+        <div class="popup-icon">&#x23F3;</div> <!-- Pending Icon -->
+        <p id="popup-message">Your payment is being processed...</p>
+    </div>
+
+    <script>
+        // Form submission and popup handling
+        document.getElementById("cryptoPaymentForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Show the popup
+            const popup = document.getElementById("popup");
+            popup.style.display = "block";
+
+            // Simulate payment processing for 12 seconds
+            setTimeout(() => {
+                // Randomly decide if the transaction is successful or not
+                const isSuccess = Math.random() > 0.5;
+
+                // Update the popup content based on the transaction status
+                if (isSuccess) {
+                    popup.innerHTML = `
+                        <div class="popup-icon">&#x2714;</div> <!-- Green Tick Icon -->
+                        <p id="popup-message">Transaction Successful!</p>
+                    `;
+                    popup.classList.add("success");
+                } else {
+                    popup.innerHTML = `
+                        <div class="popup-icon">&#x2716;</div> <!-- Red X Icon -->
+                        <p id="popup-message">Transaction Failed!</p>
+                    `;
+                    popup.classList.add("failure");
+                }
+
+                // Hide the popup after 5 seconds
+                setTimeout(() => {
+                    popup.style.display = "none";
+                    popup.classList.remove("success", "failure");
+                    popup.innerHTML = `
+                        <div class="popup-icon">&#x23F3;</div> <!-- Pending Icon -->
+                        <p id="popup-message">Your payment is being processed...</p>
+                    `;
+                }, 5000);
+            }, 12000); // 12 seconds delay
+        });
+    </script>
+</body>
+</html>

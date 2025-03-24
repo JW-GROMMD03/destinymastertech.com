@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Billing System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-image: url('hotel-n.jpg');
+            background-size:cover; 
+            background-repeat: no-repeat; 
+            background-position: center;
+            background-attachment: fixed;
+            margin:0;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('hotel-n.jpg') no-repeat center center/cover;
+        }
+
+
+        .container {
+            background-color: transparent;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px #aaa;
+            width: 300px;
+            text-align: center;
+            border: 5px solid red; /* Initial border color */
+            animation: flash-border 0.5s infinite alternate;
+        }
+
+        @keyframes flash-border {
+    0% {
+        border-color: red;
+    }
+    25% {
+        border-color: blue;
+    }
+    50% {
+        border-color: yellow;
+    }
+    75% {
+        border-color: purple;
+    }
+    100% {
+        border-color: green;
+    }
+}
+
+        .container:hover {
+            transform: scale(1.1);
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .flashing-text {
+    font-size: 24px;
+    font-weight: bold;
+    animation: flashText 1s infinite alternate;
+}
+
+@keyframes flashText {
+    0% {
+        color: red;
+    }
+    50% {
+        color: blue;
+    }
+    100% {
+        color: green;
+    }
+}
+
+
+
+/* Apply the spiral effect when the page loads */
+body {
+    animation: slideIn 0.5s ease-in-out;
+}
+
+/* Slide-in animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.sliding-text {
+    font-size: 24px;
+    font-weight: bold;
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden;
+    display: inline-block;
+    animation: slideText 300s linear infinite, changeColor 1s infinite alternate;
+}
+
+/* Sliding animation */
+@keyframes slideText {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Alternating colors animation */
+@keyframes changeColor {
+    0% { color: red; }
+    50% { color: blue; }
+    100% { color: green; }
+}
+
+
+
+.text-outside {
+    position: upway; /* Position the text outside the container */
+    top: -30px; /* Moves text above the container */
+    margin-bottom: 60px; /* Moves text 30px above the container */
+    left: 50%; 
+    transform: translateX(-50%); /* Centers the text */
+    font-size: 50px;
+    font-weight: bold;
+    color: alternates;
+    animation: slideText 5s linear infinite, changeColor 1s infinite alternate;
+}
+
+/* Slideshow settings */
+.side-slideshow {
+    position: fixed;
+    top: 50px;
+    width: 200px; /* Adjust width as needed */
+    height: calc(100vh - 100px); /* Full screen height minus top and bottom margin*/
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s ease-in-out;
+    z-index: -1; /* Puts slideshow behind everything */
+    transition: opacity 1s ease, transform 1s ease, filter 1s ease;
+}
+
+/* Left side */
+.left {
+    left: 0;
+    border-radius: 20px; /* Round the corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+
+/* Right side */
+.right {
+    right: 0;
+    border-radius: 20px; /* Round the corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+
+.back-button {
+    position: absolute;
+    top: 8px;
+    left: 15px;
+    width: auto;
+    background: #ff4d4d;
+    padding: 8px 12px;
+}
+
+.back-button:hover {
+    transform: scale(1.2);
+    animation: rainbow 1s infinite;
+}
+@keyframes rainbow {
+    0% { background: red; }
+    16% { background: orange; }
+    33% { background: yellow; }
+    50% { background: green; }
+    66% { background: blue; }
+    83% { background: indigo; }
+    100% { background: violet; }
+}
+   
+    </style>
+
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">Back</button>
+    <div class="text-outside">WELCOME AT BAMBURI TILAPIA RESTAURANT</div>
+
+    <div class="slideshow-container">
+        <div class="slide"> 
+    <div class="side-slideshow left">
+    </div>
+    <div class="slide">
+<div class="side-slideshow right">
+</div>
+</div>
+
+
+    <div id="role-selection" class="container">
+<h2 class="flashing-text">Welcome to Bamburi Tilapia</h2>
+        <h3 style="color:#28a745">Select Your Role</h3>
+        <select id="role">
+            <option value="Admin">Admin</option>
+            <option value="Manager">Manager</option>
+            <option value="Assistant Manager">Assistant Manager</option>
+        </select>
+        <button onclick="navigateToRolePage()">Continue</button>
+    </div>
+
+    <script>
+        function navigateToRolePage() {
+            // Get the selected role value
+            let role = document.getElementById("role").value;
+            
+            // Based on the role selected, define the URL to redirect to
+            let destinationURL;
+            if (role === "Customer") {
+                destinationURL = "Login Chef.html"; // Navigate to customer login page
+             }else if (role=== "Admin") {
+                destinationURL = "Login page.html"; // Navigate to admin login page
+             }else if (role=== "Manager") {
+                destinationURL = "Login Manager.html"; // Navigate to manager login page
+
+            } else {
+                destinationURL = "Login A. Manager.html"; // Navigate to assistant manager login page
+            }
+
+            // Redirect the user to the determined page
+            window.location.href = destinationURL;
+        }
+
+        
+        const leftImages = [
+    "Food1.jpeg", "Food2.jpeg", "Food3.jpeg", "Food4.jpeg",
+    "Food5.jpeg", "Food6.jpeg", "Food7.jpeg", "Food8.jpeg",
+    "Food9.jpeg", "Food10.jpeg"
+];
+
+const rightImages = [
+    "Dink1.jpeg", "Drink2.jpeg", "Drink3.jpeg", "Drink4.jpeg",
+    "Drink5.jpeg", "Drink9.jpeg", "Drink6.jpeg", "Drink10.jpeg",
+    "Drink8.jpeg", "Drink7.jpeg"
+];
+
+let leftIndex = 0;
+let rightIndex = 0;
+
+function changeImages() {
+    document.querySelector(".left").style.backgroundImage = `url(${leftImages[leftIndex]})`;
+    document.querySelector(".right").style.backgroundImage = `url(${rightImages[rightIndex]})`;
+
+    leftIndex = (leftIndex + 1) % leftImages.length;
+    rightIndex = (rightIndex + 1) % rightImages.length;
+}
+
+setInterval(changeImages, 4000); // Change every 4 seconds
+changeImages(); // Initialize first images
+
+
+  // Function to go back to the previous page
+  function goBack() {
+            window.history.back();
+      }
+
+    </script>
+</body>
+</html>

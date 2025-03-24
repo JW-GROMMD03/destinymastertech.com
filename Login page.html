@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            background-image: url('admin.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background:url('admin.jpeg') no-repeat center center/cover;
+        }
+
+        .header, .footer {
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            background-color: #222;
+            color: white;
+            position: absolute;
+        }
+        .header {
+           top: 0px;
+        }
+        .footer {
+            bottom: 0;
+        }
+
+        .login-container {
+            background: transparent;
+            padding: 80px;
+            border-radius: 32px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .login-container {
+    
+    border: 5px solid red; /* Initial border color */
+    animation: flash-border 1s infinite alternate;
+}
+
+@keyframes flash-border {
+    0% {
+        border-color: red;
+    }
+    25% {
+        border-color: yellow;
+    }
+    50% {
+        border-color: blue;
+    }
+    75% {
+        border-color: purple;
+    }
+    100% {
+        border-color: green;
+    }
+}
+
+
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px -10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background-color: #218838;
+        }
+        .popup {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 25%;
+            text-align: center;
+        }
+        .popup button {
+            background-color: red;
+        }
+
+        /* Apply the slide effect when the page loads */
+/* Apply the slide effect when the page loads */
+@keyframes spiralIn {
+    0% {
+        transform: scale(2) rotate(360deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Page exits with a spiral effect */
+@keyframes spiralOut {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(-360deg);
+        opacity: 0;
+    }
+}
+
+/* Apply the effect to the whole page */
+.page-enter {
+    animation: spiralIn 1s ease-in-out forwards;
+}
+
+.page-exit {
+    animation: spiralOut 1s ease-in-out forwards;
+}
+.back-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    position: absolute;
+    top: 10px;       /* Distance from the top */
+    left: 10px;      /* Distance from the left */
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.flashing-text {
+    font-size: 24px;
+    font-weight: bold;
+    animation: flashText 5s infinite alternate;
+}
+
+@keyframes flashText {
+    0% {
+        color: red;
+    }
+    25% {
+        color: blue;
+    } 
+    50% {
+        color: yellow;
+    }
+    75% {
+        color: purple;
+    }
+    100% {
+        color: green;
+    }
+}
+/*The lighting effect of the container input section*/
+.input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #333;
+            color: transparent;
+            transition: background-color 0.5s, color 1s ease-in-out;
+            position: relative;
+            z-index: 1;
+            font-family: monospace; /* Ensures consistent spacing for asterisks */
+        }
+.eye {
+            position: absolute;
+            right: 0px;
+            top: 25%;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.5s ease, color 0.5s ease;
+            z-index: 2;
+        }
+        .light {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(to right, rgba(255, 255, 0, 0.8), rgba(255, 255, 0, 0));
+            transition: width 1s ease-in-out;
+            z-index: 0;
+        }
+
+.reveal input {
+            color: white;
+            background-color: #111;
+            clip-path: inset(0 100% 0 0);
+            animation: reveal-text 1s forwards;
+        }
+        .hide input {
+            animation: hide-text 1s forwards;
+        }
+        .reveal .eye {
+            transform: scale(1.2);
+            color: yellow;
+        }
+        .reveal .light {
+            width: 100%;
+            position:absolute;
+        }
+        @keyframes reveal-text {
+            from { clip-path: inset(0 100% 0 0); }
+            to { clip-path: inset(0 0% 0 0); }
+        }
+        @keyframes hide-text {
+            from { clip-path: inset(0 0% 0 0); }
+            to { clip-path: inset(0 100% 0 0); }
+        }
+
+    </style>
+    
+</head>
+<body>
+    <div class="header">Welcome to Our Website</div>
+    <div class="login-container">
+        <button class="back-button" onclick="goBack()">🔙 Go Back</button>
+        <h2 class="flashing-text">Login to Admin account.</h2>
+        <h3 class="flashing-text">If you have no account then sign in</h3>
+        <div class="input-container">
+            <input type="password" id="user_id" placeholder="Enter User ID" required class="hidden-input">
+            <span class="eye" onclick="toggleVisibility()">👁️</span>
+            <div class="light"></div>
+        </div>
+        <div>
+            <button onclick="login()">Login</button>
+            <button onclick="signIn()">Sign In</button>
+        </div>
+    </div>
+    
+    <div id="popup" class="popup">
+        <p>Please enter your User ID to login.</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+    <div class="footer">&copy; 2025 Your Website. All rights reserved.</div>
+
+    <script>
+        function signIn() {
+            window.location.href = 'Signin.html';
+        }
+// In the login page script
+let storedCredentials = JSON.parse(localStorage.getItem('credentials')) || { userId: null, password: null };
+
+function login() {
+    let userId = document.getElementById('user_id').value;
+    let password = document.getElementById('password').value;
+
+    if (userId === storedCredentials.userId && password === storedCredentials.password) {
+        window.location.href = 'nextpage.html'; // Redirect to the next page
+    } else {
+        alert('Invalid User ID or Password.');
+    }
+}
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function goBack() {
+    window.history.back();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Add enter animation when page loads
+    document.body.classList.add("page-enter");
+
+    // Handle link clicks to trigger exit animation
+    document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", function(event) {
+            event.preventDefault(); // Stop immediate navigation
+            
+            let destination = this.href;
+            
+            document.body.classList.add("page-exit");
+            
+            setTimeout(() => {
+                window.location.href = destination; // Navigate after animation
+            }, 1000); // Matches animation duration
+        });
+    });
+});
+
+function toggleVisibility() {
+            let input = document.getElementById('user_id');
+            let inputBox = document.querySelector('.input-container');
+            if (input.type === 'password') {
+                input.type = 'text';
+                inputBox.classList.add('reveal');
+                inputBox.classList.remove('hide');
+            } else {
+                input.type = 'password';
+                inputBox.classList.add('hide');
+                inputBox.classList.remove('reveal');
+            }
+        }
+
+    </script>
+</body>
+</html>

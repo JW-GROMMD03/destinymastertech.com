@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            background-image: url('hotel2.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('hotel2.jpeg') no-repeat center center/cover;
+        }
+        .login-container {
+            background: transparent;
+            padding: 80px;
+            border-radius: 32px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .login-container {
+            border: 5px solid red; /* Initial border color */
+            animation: flash-border 1s infinite alternate;
+        }
+
+        @keyframes flash-border {
+            0% {
+                border-color: red;
+            }
+            25% {
+                border-color: yellow;
+            }
+            50% {
+                border-color: blue;
+            }
+            75% {
+                border-color: purple;
+            }
+            100% {
+                border-color: green;
+            }
+        }
+
+        .login-container:hover {
+            transform: scale(1.1);
+            transition: 0.1s ease-in-out;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px -10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: #218838;
+        }
+
+        .back-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            position: absolute;
+            top: 10px;       /* Distance from the top */
+            left: 10px;      /* Distance from the left */
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .popup {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 25%;
+            text-align: center;
+        }
+
+        .popup button {
+            background-color: red;
+        }
+
+        /* Password toggle styling */
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #007bff;
+        }
+
+        .toggle-password:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <button class="back-button" onclick="goBack()">🔙 Go Back</button>
+        <h2 style="color: aqua;">Login to your Customer account.</h2>
+        <h3 style="color: aqua;">If you have no account then sign in</h3>
+        <input type="text" id="user_id" placeholder="Enter User ID" required>
+        <div class="password-container">
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <span class="toggle-password" id="toggle-text" onclick="togglePassword()">Show</span>
+        </div>
+        <div>
+            <button onclick="login()">Login</button>
+            <button onclick="signIn()">Sign Up</button>
+        </div>
+    </div>
+
+    <!-- Popup for incorrect credentials -->
+    <div id="popup" class="popup">
+        <p id="popup-message">Please enter your User ID to login.</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+
+    <script>
+        // Default credentials
+        const defaultUserId = " Customer";
+        const defaultPassword = "password";
+
+        function signIn() {
+            window.location.href = 'Signin Customer.html';
+        }
+
+       // In the login page script
+let storedCredentials = JSON.parse(localStorage.getItem('credentials')) || { userId: null, password: null };
+
+function login() {
+    let userId = document.getElementById('user_id').value;
+    let password = document.getElementById('password').value;
+
+    if (userId === storedCredentials.userId && password === storedCredentials.password) {
+        window.location.href = 'Customer inRBL.html'; // Redirect to the next page
+    } else {
+        alert('Invalid User ID or Password.');
+    }
+}
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function togglePassword() {
+            const passwordInput = document.getElementById("password");
+            const toggleText = document.getElementById("toggle-text");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleText.textContent = "Hide";
+            } else {
+                passwordInput.type = "password";
+                toggleText.textContent = "Show";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Add enter animation when page loads
+            document.body.classList.add("page-enter");
+
+            // Handle link clicks to trigger exit animation
+            document.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", function(event) {
+                    event.preventDefault(); // Stop immediate navigation
+
+                    let destination = this.href;
+
+                    document.body.classList.add("page-exit");
+
+                    setTimeout(() => {
+                        window.location.href = destination; // Navigate after animation
+                    }, 1000); // Matches animation duration
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            background: white;
+            padding: 80px;
+            border-radius: 32px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px -10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background-color: #218838;
+        }
+        .popup {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 25%;
+            text-align: center;
+        }
+        .popup button {
+            background-color: red;
+        }
+
+
+/* Apply the slide effect when the page loads */
+@keyframes spiralIn {
+    0% {
+        transform: scale(2) rotate(360deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Page exits with a spiral effect */
+@keyframes spiralOut {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(-360deg);
+        opacity: 0;
+    }
+}
+
+/* Apply the effect to the whole page */
+.page-enter {
+    animation: spiralIn 1s ease-in-out forwards;
+}
+
+.page-exit {
+    animation: spiralOut 1s ease-in-out forwards;
+}
+
+.back-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    position: absolute;
+    top: 10px;       /* Distance from the top */
+    left: 10px;      /* Distance from the left */
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+    </style>
+    <script>
+        function signIn() {
+            window.location.href = 'Signin Cashier.html';
+        }
+
+        function login() {
+            let userId = document.getElementById("user_id").value;
+            if (userId === "Cashier") {
+                window.location.href = 'nextpage.html';  // Redirect to the next page for Admin
+            } else if (!userId) {
+                document.getElementById("popup").style.display = "block";
+            } else {
+                alert("Incorrect User ID. Please try again.");
+            }
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+        function goBack() {
+    window.history.back();
+}
+document.addEventListener("DOMContentLoaded", () => {
+    // Add enter animation when page loads
+    document.body.classList.add("page-enter");
+
+    // Handle link clicks to trigger exit animation
+    document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", function(event) {
+            event.preventDefault(); // Stop immediate navigation
+            
+            let destination = this.href;
+            
+            document.body.classList.add("page-exit");
+            
+            setTimeout(() => {
+                window.location.href = destination; // Navigate after animation
+            }, 1000); // Matches animation duration
+        });
+    });
+});
+
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <button class="back-button" onclick="goBack()">🔙 Go Back</button>
+        <h2>Login to Chief Chef account.</h2>
+        <h3>If you have no account then sign in</h3>
+        <input type="text" id="user_id" placeholder="Enter User ID" required>
+        <div>
+            <button onclick="login()">Login</button>
+            <button onclick="signIn()">Sign In</button>
+        </div>
+    </div>
+    <div id="popup" class="popup">
+        <p>Please enter your User ID to login.</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+</body>
+</html>

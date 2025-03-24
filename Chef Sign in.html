@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            background-image: url('Chef.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6)), 
+                url('Chef.jpeg') no-repeat center center/cover;
+        }
+        .container {
+            background: white;
+            padding: 80px;
+            border-radius: 32px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .popup p {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .popup .success {
+            color: green;
+            font-size: 20px;
+        }
+
+        /* Apply the slide effect when the page loads */
+body {
+    animation: slideIn 0.5s ease-in-out;
+}
+
+/* Slide-in animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.back-button {
+    width: auto;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    position: absolute;
+    top: 10px;       /* Distance from the top */
+    left: 10px;      /* Distance from the left */
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="back-button" onclick="goBack()">🔙 Go Back</button>
+        <h2>Sign Up as for a Chief Chef account</h2>
+        <form id="signInForm">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+            <span class="error" id="emailError"></span>
+            
+            <label for="userId">User ID:</label>
+            <input type="text" id="userId" name="userId" required>
+            
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+    
+    <div class="popup" id="popup">
+        <p id="popupMessage"></p>
+    </div>
+    
+    <script>
+        let usedEmails = ["test@example.com", "user@domain.com"]; // Sample used emails
+        
+        document.getElementById('signInForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let email = document.getElementById('email').value;
+            let emailError = document.getElementById('emailError');
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let popup = document.getElementById('popup');
+            let popupMessage = document.getElementById('popupMessage');
+            
+            if (!emailPattern.test(email)) {
+                emailError.textContent = 'Please enter a valid email address';
+            } else {
+                emailError.textContent = '';
+                
+                if (usedEmails.includes(email)) {
+                    popupMessage.innerHTML = 'This email has been used before';
+                } else {
+                    popupMessage.innerHTML = '<span class="success">✔ You have signed in successfully</span>';
+                    usedEmails.push(email); // Add new email to used list
+                    
+                    setTimeout(() => {
+                        popup.style.display = 'none';
+                        window.location.href = 'Login Cashier.html'; // Redirect to a black page
+                    }, 5000);
+                }
+                popup.style.display = 'block';
+            }
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+        
+    </script>
+</body>
+</html>

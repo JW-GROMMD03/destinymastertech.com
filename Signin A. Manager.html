@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            background-image: url('hotel2.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('hotel2.jpeg') no-repeat center center/cover;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .container {
+            background: transparent;
+            padding: 80px;
+            border-radius: 32px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 5px solid red;
+            animation: flash-border 1s infinite alternate;
+        }
+
+        @keyframes flash-border {
+            0% {
+                border-color: red;
+            }
+            25% {
+                border-color: yellow;
+            }
+            50% {
+                border-color: blue;
+            }
+            75% {
+                border-color: purple;
+            }
+            100% {
+                border-color: green;
+            }
+        }
+
+        
+
+        input {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .popup p {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .popup .success {
+            color: green;
+            font-size: 20px;
+        }
+
+        .back-button {
+            width: auto;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            position: absolute;
+            top: 10px;       /* Distance from the top */
+            left: 10px;      /* Distance from the left */
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #007bff;
+        }
+
+        .toggle-password:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="back-button" onclick="goBack()">🔙 Go Back</button>
+        <h2 style="color: aqua;">Sign In for an A. Manager Account</h2>
+        <form id="signInForm">
+            <label for="email" style="color: aqua;">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+            <span class="error" id="emailError"></span>
+            
+            <label for="userId" style="color: aqua;">User ID:</label>
+            <input type="text" id="userId" name="userId" required>
+            
+            <label for="password" style="color: aqua;">Password:</label>
+            <div class="password-container">
+                <input type="password" id="password" name="password" required>
+                <span class="toggle-password" id="toggle-text" onclick="togglePassword()">Show</span>
+            </div>
+            
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+    
+    <!-- Popup for notifications -->
+    <div class="popup" id="popup">
+        <p id="popupMessage"></p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+    
+    <script>
+        // Store credentials in localStorage
+        let storedCredentials = JSON.parse(localStorage.getItem('credentials')) || { userId: null, password: null };
+
+        document.getElementById('signInForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let email = document.getElementById('email').value;
+            let userId = document.getElementById('userId').value;
+            let password = document.getElementById('password').value;
+            let emailError = document.getElementById('emailError');
+            let popup = document.getElementById('popup');
+            let popupMessage = document.getElementById('popupMessage');
+            
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(email)) {
+                emailError.textContent = 'Please enter a valid email address';
+            } else {
+                emailError.textContent = '';
+
+                // Update stored credentials
+                storedCredentials.userId = userId;
+                storedCredentials.password = password;
+                localStorage.setItem('credentials', JSON.stringify(storedCredentials));
+
+                popupMessage.innerHTML = '<span class="success">✔ You have signed in successfully</span>';
+                popup.style.display = 'block';
+
+                setTimeout(() => {
+                    popup.style.display = 'none';
+                    window.location.href = 'Login A.Manager.html'; // Redirect to login page
+                }, 3000);
+            }
+        });
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleText = document.getElementById('toggle-text');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleText.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                toggleText.textContent = 'Show';
+            }
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Payment</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+            animation: rainbow-border 2s infinite;
+        }
+        .container:hover {
+            transform: scale(1.05); /* Increase size on hover */
+            border-width: 4px; /* Increase border thickness on hover */
+        }
+        @keyframes rainbow-border {
+            0% { border-color: red; }
+            16% { border-color: orange; }
+            33% { border-color: yellow; }
+            50% { border-color: green; }
+            66% { border-color: blue; }
+            83% { border-color: indigo; }
+            100% { border-color: violet; }
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #218838;
+            transform: scale(1.1); /* Increase size on hover */
+            filter: brightness(1.2); /* Brighten the button on hover */
+        }
+        /* Back Button Styles */
+        .back-button {
+            width:auto;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            text-align: center;
+        }
+        .popup-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .popup.success .popup-icon {
+            color: green;
+        }
+        .popup.failure .popup-icon {
+            color: red;
+        }
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%; /* Make the container slightly smaller on small screens */
+                padding: 15px;
+            }
+            h2 {
+                font-size: 1.5em; /* Reduce heading size on small screens */
+            }
+            input, select, button[type="submit"] {
+                padding: 10px; /* Increase padding for better touch interaction */
+            }
+            .back-button {
+                font-size: 10px; /* Reduce back button size on small screens */
+                padding: 4px 8px;
+            }
+        }
+        @media (max-width: 400px) {
+            .container {
+                width: 100%; /* Full width on very small screens */
+                border-radius: 0; /* Remove border radius for full-width effect */
+                border: none; /* Remove border for full-width effect */
+                box-shadow: none; /* Remove shadow for full-width effect */
+            }
+            h2 {
+                font-size: 1.2em; /* Further reduce heading size */
+            }
+            input, select, button[type="submit"] {
+                font-size: 14px; /* Adjust font size for better readability */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Back Button -->
+        <button class="back-button" onclick="history.back()">&larr; Back</button>
+
+        <h2>Debit Card Payment</h2>
+        <form id="creditCardForm">
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required>
+            
+            <label for="cardHolder">Cardholder Name:</label>
+            <input type="text" id="cardHolder" name="cardHolder" placeholder="John Doe" required>
+            
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="month" id="expiryDate" name="expiryDate" required>
+            
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" placeholder="123" required>
+            
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
+
+    <!-- Popup Container -->
+    <div id="popup" class="popup">
+        <div class="popup-icon">&#x23F3;</div> <!-- Pending Icon -->
+        <p id="popup-message">Your payment is being processed...</p>
+    </div>
+
+    <script>
+        // Form submission and popup handling
+        document.getElementById("creditCardForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Show the popup
+            const popup = document.getElementById("popup");
+            popup.style.display = "block";
+
+            // Simulate payment processing for 12 seconds
+            setTimeout(() => {
+                // Randomly decide if the transaction is successful or not
+                const isSuccess = Math.random() > 0.5;
+
+                // Update the popup content based on the transaction status
+                if (isSuccess) {
+                    popup.innerHTML = `
+                        <div class="popup-icon">&#x2714;</div> <!-- Green Tick Icon -->
+                        <p id="popup-message">Transaction Successful!</p>
+                    `;
+                    popup.classList.add("success");
+                } else {
+                    popup.innerHTML = `
+                        <div class="popup-icon">&#x2716;</div> <!-- Red X Icon -->
+                        <p id="popup-message">Transaction Failed!</p>
+                    `;
+                    popup.classList.add("failure");
+                }
+
+                // Hide the popup after 5 seconds
+                setTimeout(() => {
+                    popup.style.display = "none";
+                    popup.classList.remove("success", "failure");
+                    popup.innerHTML = `
+                        <div class="popup-icon">&#x23F3;</div> <!-- Pending Icon -->
+                        <p id="popup-message">Your payment is being processed...</p>
+                    `;
+                }, 5000);
+            }, 12000); // 12 seconds delay
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+body {
+    animation: slideIn 0.5s ease-in-out;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+    background-color: #f8f8f8;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('Family1.jpeg') no-repeat center center/cover fixed;
+}
+/* Slide-in animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-btn {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+table {
+    width: 80%;
+    margin: auto;
+    border-collapse: collapse;
+    background-color: transparent;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2a30f;
+    color: white;
+}
+td {
+    background-color: transparent;
+    color:aqua;
+}
+
+img {
+    width: 80px;
+    height: 60px;
+    border-radius: 5px;
+}
+
+#buttons {
+    display: flex;
+    justify-content: center; /* Centers buttons horizontally */
+    gap: 20px; /* Adds space between buttons */
+    margin-top: 10px;
+}  
+
+button {
+    background-color:blue;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: darkgreen;
+    transition: 0.1s ease-in-out;
+    transform: scale(1.1);
+}
+
+.back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: auto;
+    background: #ff4d4d;
+    padding: 8px 12px;
+}
+
+.back-button:hover {
+    transform: scale(1.2);
+    animation: rainbow 1s infinite;
+}
+@keyframes rainbow {
+    0% { background: red; }
+    16% { background: orange; }
+    33% { background: yellow; }
+    50% { background: green; }
+    66% { background: blue; }
+    83% { background: indigo; }
+    100% { background: violet; }
+}
+
+#order-summary {
+    margin-top: 20px;
+}
+
+#order-list {
+    list-style: none;
+    padding: 0;
+}
+
+#order-list li {
+    padding: 5px;
+    background: white;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+    margin-top: 0;
+}
+
+.modal-content table {
+    width: 100%;
+    margin: 10px 0;
+    border-collapse: collapse;
+}
+
+.modal-content th, .modal-content td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.modal-content th {
+    background-color: #f2f2f2;
+}
+
+.modal-buttons button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-buttons button:first-child {
+    background-color: #4CAF50; /* Green for Submit */
+    color: white;
+}
+
+.modal-buttons button:last-child {
+    background-color: #f44336; /* Red for Cancel */
+    color: white;
+}
+
+ /* Order confirmation pop-up */
+ #order-confirmation-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #28a745;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000;
+}
+.total-price{
+    color: aqua;
+}

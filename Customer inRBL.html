@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Billing</title>
+    <link rel="stylesheet" href="customer.css">
+</head>
+<body class="body" >
+   <div class="background-image"></div> 
+    <div class="container">
+        <button class="back-button" onclick="goBack()">🔙 Go Back</button>
+        <h1>Welcome to Bamburi Tilapia</h1>
+        <h2>Restaurant Billing</h2>
+        
+        <!-- Table Booking Section -->
+        <div class="input-group">
+            <button id="bookButton" onclick="focusOnTableSelect()" class="button">Book Table</button>
+            <label for="tableSelect">Select Table Number</label>
+            <select id="tableSelect" onchange="updateTableStatus()" disabled>
+                <option value="" disabled selected>Select Table</option>
+                <!-- Table options will be populated dynamically by JavaScript -->
+            </select>
+        </div>
+        
+        <!-- Item Selection -->
+        <div class="input-group">
+            <select id="itemSelect">
+                <option value="" enabled selected>Select Item</option>
+                <option value="Burger" data-price="500">Burger - Ksh 500</option>
+                <option value="Pizza" data-price="1200">Pizza - Ksh 1200</option>
+                <option value="Pasta" data-price="800">Pasta - Ksh 800</option>
+                <option value="Salad" data-price="400">Salad - Ksh 400</option>
+                <option value="Soda" data-price="150">Soda - Ksh 150</option>
+                <option value="Tilapia" data-price="1000">Tilapia Wet Fry - Ksh 1000</option>
+            </select>
+            <input type="number" id="quantity" min="1" value="1">
+            <button onclick="addToOrder()" class="button">Add to Order</button>
+        </div>
+        
+        <!-- Order Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="orderTableBody"></tbody>
+        </table>
+        
+        <!-- Total Price Display -->
+        <div class="total">Total: Ksh <span id="totalPrice">0</span></div>
+        
+        <!-- Submit and Pay Buttons -->
+        <div class="submit-button">
+            <button id="submitOrderBtn" onclick="showConfirmationPopup()" class="button">Submit Your Order</button>
+            <button id="payButton" onclick="redirectToPayment()" class="button pay-button" style="background-color: red;" disabled>Click to Pay</button>
+        </div>
+    </div>
+
+    <div id="popupContainer" class="popup-container" style="display: none;">
+        <div class="popup">
+            <p id="popupMessage"></p>
+            <button onclick="confirmOrder()" class="confirm-button">Submit</button>
+            <button onclick="cancelOrder()" class="cancel-button">Cancel</button>
+        </div>
+    </div>
+
+        
+    <div id="ratingSection">
+        <h3>Rate Our Services:</h3>
+        <div class="feedback-stars">
+            <button class="feedback-btn" data-value="1">☆</button>
+            <button class="feedback-btn" data-value="2">☆</button>
+            <button class="feedback-btn" data-value="3">☆</button>
+            <button class="feedback-btn" data-value="4">☆</button>
+            <button class="feedback-btn" data-value="5">☆</button>
+        </div>
+        <p id="ratingText"></p>
+
+        <div id="feedbackSection" style="display: none;">
+            <h4>Select a reason for your rating:</h4>
+            <div id="feedbackOptions"></div>
+            
+        </div>
+        <button id="submitFeedback" style="display: none;" onclick="showRatingPopup(' your view(s).Your time is highly appreciated')">Submit Rating</button>
+    </div>
+    
+    <script src="customer.js"></script>
+</body>
+</html>

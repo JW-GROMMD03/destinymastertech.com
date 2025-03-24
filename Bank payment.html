@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Transfer Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.05);
+            animation: rainbow-border 2s infinite;
+        }
+        @keyframes rainbow-border {
+            0% { border-color: red; }
+            16% { border-color: orange; }
+            33% { border-color: yellow; }
+            50% { border-color: green; }
+            66% { border-color: blue; }
+            83% { border-color: indigo; }
+            100% { border-color: violet; }
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .back-button:hover{
+            content-visibility: ;
+        }
+        .back-button {
+            width:auto;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            text-align: center;
+        }
+        .popup-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .popup.success .popup-icon {
+            color: green;
+        }
+        .popup.failure .popup-icon {
+            color: red;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            input, select, button {
+                padding: 10px;
+            }
+            .back-button {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+        }
+        @media (max-width: 400px) {
+            .container {
+                width: 100%;
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            input, select, button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Back Button -->
+        <button class="back-button" onclick="history.back()">&larr; Back</button>
+
+        <h2>Bank Transfer Payment</h2>
+        <form id="bankTransferForm">
+            <label for="bankName">Select Your Bank:</label>
+            <select id="bankName" name="bankName" required>
+                <option value="">-- Select a Bank --</option>
+                <option value="equity">Equity Bank</option>
+                <option value="kcb">Kenya Commercial Bank (KCB)</option>
+                <option value="coop">Co-operative Bank</option>
+                <option value="absa">Absa Bank Kenya</option>
+                <option value="stanbic">Stanbic Bank</option>
+                <option value="citi">Citibank</option>
+                <option value="barclays">Barclays</option>
+                <option value="hsbc">HSBC</option>
+                <option value="chase">JPMorgan Chase</option>
+                <option value="wells">Wells Fargo</option>
+                <option value="boa">Bank of America</option>
+                <option value="standard">Standard Chartered</option>
+            </select>
+            
+            <label for="otherBank">If Other, Enter Bank Name:</label>
+            <input type="text" id="otherBank" name="otherBank" placeholder="Enter bank name">
+            
+            <label for="accountNumber">Account Number:</label>
+            <input type="text" id="accountNumber" name="accountNumber" required placeholder="Enter account number">
+            
+            <label for="accountHolder">Account Holder Name:</label>
+            <input type="text" id="accountHolder" name="accountHolder" required placeholder="John Doe">
+            
+            <label for="transferAmount">Transfer Amount (USD):</label>
+            <input type="number" id="transferAmount" name="transferAmount" required min="1" placeholder="Enter amount">
+            
+            <button type="submit">Proceed with Transfer</button>
+        </form>
+    </div>
+
+    <!-- Popup Container -->
+    <div id="popup" class="popup">
+        <div class="popup-icon">&#x23F3;</div> <!-- Pending Icon -->
+        <p id="popup-message">Your payment is being processed...</p>
+    </div>
+
+    <script>
+        // Get references to the dropdown and input field
+        const bankNameSelect = document.getElementById("bankName");
+        const otherBankInput = document.getElementById("otherBank");
+
+        // Disable "Other Bank" input if a bank is selected
+        bankNameSelect.addEventListener("change", function() {
+            if (bankNameSelect.value !== "") {
+                otherBankInput.disabled = true; // Disable input if a bank is selected
+                otherBankInput.value = ""; // Clear the input field
+            } else {
+                otherBankInput.disabled = false; // Enable input if no bank is selected
+            }
+        });
+
+        // Disable bank selection if "Other Bank" input has a value
+        otherBankInput.addEventListener("input", function() {
+            if (otherBankInput.value.trim() !== "") {
+                bankNameSelect.disabled = true; // Disable dropdown if "Other Bank" has a value
+            } else {
+                bankNameSelect.disabled = false; // Enable dropdown if "Other Bank" is empty
+            }
+        });
+
+        // Form submission and popup handling
+        document.getElementById("bankTransferForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Validate that either a bank is selected or "Other Bank" is filled
+            if (bankNameSelect.value === "" && otherBankInput.value.trim() === "") {
+                alert("Please select a bank or enter a custom bank name.");
+                return;
+            }
+
+            // Show the popup
+            const popup = document.getElementById("popup");
+            popup.style.display = "block";
+
+            // Simulate payment processing for 12 seconds
+            setTimeout(() => {
+                // Randomly decide if the transaction is successful or not
+                const isSuccess = Math.random() > 0.5;
+
+                // Update the popup content based on the transaction status
+                if (isSuccess) {
+                    popup.innerHTML = `
+                        <div class="popup-icon">&#x2714;</div> <!-- Green Tick Icon -->
+                        <p id="popup-message">Transaction Successful!</p>
+                    `;
+                    popup.classList.add("success");
+                } else {
+                    popup.innerHTML = `
+                        <div class="popup-icon">&#x2716;</div> <!-- Red X Icon -->
+                        <p id="popup-message">Transaction Failed!</p>
+                    `;
+                    popup.classList.add("failure");
+                }
+
+                // Hide the popup after 5 seconds
+                setTimeout(() => {
+                    popup.style.display = "none";
+                    popup.classList.remove("success", "failure");
+                    popup.innerHTML = `
+                        <div class="popup-icon">&#x23F3;</div> <!-- Pending Icon -->
+                        <p id="popup-message">Your payment is being processed...</p>
+                    `;
+                }, 5000);
+            }, 12000); // 12 seconds delay
+        });
+    </script>
+</body>
+</html>

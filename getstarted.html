@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started - Our Restaurant</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            animation: slideIn 0.5s ease-in-out;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+            url('Family1.jpeg') no-repeat center center/cover fixed;
+}
+        
+        /* Slide-in animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+        header {
+            background-color: transparent;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .offer-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .offer-container img {
+            width: 45%;
+            border-radius: 10px;
+        }
+
+        .offer-text {
+            width: 45%;
+            text-align: left;
+        }
+
+        .offer-container.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .login-signup a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .login-signup a.signup {
+            background: #007bff;
+        }
+        footer {
+            background: #222;
+            color: white;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .social-links a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+        }
+        .sliding-text {
+    font-size: 24px;
+    font-weight: bold;
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden;
+    display: inline-block;
+    animation: slideText 300s linear infinite, changeColor 1s infinite alternate;
+}
+
+/* Sliding animation */
+@keyframes slideText {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+        /* Alternating colors animation */
+@keyframes changeColor {
+    0% { color: red; }
+    50% { color: blue; }
+    100% { color: green; }
+}
+
+
+
+.text-outside {
+    position: upway; /* Position the text outside the container */
+    top: -30px; /* Moves text above the container */
+    margin-bottom: 60px; /* Moves text 30px above the container */
+    left: 50%; 
+    transform: translateX(-50%); /* Centers the text */
+    font-size: 50px;
+    font-weight: bold;
+    color: alternates;
+    animation: slideText 5s linear infinite, changeColor 1s infinite alternate;
+}
+footer {
+            background: #222;
+            color: white;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+
+        .footer-item a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-item i {
+            margin-right: 8px;
+        }
+
+        .social-links {
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            color: #007bff;
+        }
+
+        .review {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+.review:last-child {
+    border-bottom: none;
+}
+.review h2 {
+    color: aquamarine;
+    margin-bottom: 10px;
+}
+.review p {
+    font-size: 16px;
+    color: aqua;
+    margin: 5px 0;
+}
+.review .rating {
+    font-size: 24px;
+    color: #ffcc00;
+}
+.review .author {
+    font-weight: bold;
+    color: aqua;
+}
+
+.back-button {
+    position: absolute;
+    top: 75px;
+    left: 15px;
+    width: auto;
+    background: #ff4d4d;
+    padding: 8px 12px;
+}
+
+.back-button:hover {
+    transform: scale(1.2);
+    animation: rainbow 1s infinite;
+}
+@keyframes rainbow {
+    0% { background: red; }
+    16% { background: orange; }
+    33% { background: yellow; }
+    50% { background: green; }
+    66% { background: blue; }
+    83% { background: indigo; }
+    100% { background: violet; }
+}
+   
+    </style>
+</head>
+<body>
+    <header><div class="text-outside">WELCOME AT BAMBURI TILAPIA RESTAURANT</div></header>
+    <button class="back-button" onclick="goBack()">Back</button>
+    <div class="container">
+        <h2>Why Create an Account?</h2>
+        <p>Opening a Bamburi Tilapia customer account is a fantastic way to enhance your 
+            dining experience and enjoy exclusive benefits tailored just for you. By creating 
+            an account, you gain access to special promotions, discounts, and early notifications
+             about new menu items or seasonal offerings. Additionally, you’ll earn rewards points
+              with every purchase, which can be redeemed for free meals or other exciting perks. 
+              It’s also a convenient way to track your order history, save your favorite dishes, 
+              and enjoy faster, personalized service. Join the Bamburi Tilapia family today and 
+              make every visit even more rewarding!</p>
+    </div>
+    
+    <div class="container offers">
+        <h2>Our Special Offers</h2>
+        <div class="offer-container">
+            <img src="Food11.jpeg" alt="Weekly Offer">
+            <div class="offer-text">
+                <h3>Get 20% Off Every Friday!</h3>
+                <p>Come dine with us every Friday and enjoy a massive 20% discount on
+                     all meals. A perfect way to kickstart your weekend! And it gets even better with 
+                    those who have a <strong style="color: purple;">Bamburi Tilapia Customer Account</strong> 
+                    which enables them to get premium offers and discounts with every purchase! At Bamburi
+                Tilapia Restaurant every purchase counts. </p>
+            </div>
+        </div>
+
+        <div class="offer-container reverse">
+            <img src="Food10.jpeg" alt="Monthly Offer">
+            <div class="offer-text">
+                <h3>Free Dessert with Every Meal!</h3>
+                <p>This month, enjoy a complimentary dessert with every main course ordered. A sweet 
+                    treat to make your meal even more delightful! A perfect way to kickstart your Month! And
+                     it gets even better with 
+                    those who have a <strong style="color: purple;">Bamburi Tilapia Customer Account</strong> 
+                    which enables them to get premium offers and discounts with every purchase! At Bamburi
+                Tilapia Restaurant every purchase counts. If you have a customer account this month we have got 
+            you covered. Check your account we have unlished awesome discounts, free deliveries, free meals
+        and great perks just for you! </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="review">
+        <h2>What Our Customers Say</h2>
+        <div class="rating">★★★★☆</div>
+        <p>"I can’t say enough good things about Bamburi Tilapia! 
+            The wet fry tilapia is an absolute masterpiece—perfectly 
+            seasoned and cooked to perfection. I also tried their grilled 
+            steak, and it was so tender and flavorful, it melted in my mouth.
+             The customer account is a game-changer! I’ve enjoyed free deliveries, 
+             exclusive discounts, and even a free meal on my birthday. The perks 
+             are incredible, and I love being able to track my orders and deliveries 
+             so easily. The staff is always friendly, and the service is top-notch.
+              Bamburi Tilapia has become my go-to spot for delicious food and amazing 
+              deals. Highly recommend!" </p>
+              <p class="author">- Sarah M.</p>
+              <div class="rating">★★★★★</div>
+        <p>"Bamburi Tilapia is hands down the best restaurant in town! Their pasta 
+            delight is creamy and rich, and the grilled chicken is always juicy and 
+            perfectly spiced. I’m also obsessed with their cheesecake—it’s the perfect 
+            way to end a meal. Signing up for a customer account was the best decision ever.
+             I get weekly offers, free delivery, and discounts that make dining here even more
+              enjoyable. The festive offers are fantastic too! The food is consistently delicious,
+               and the service is always warm and welcoming. If you haven’t tried Bamburi Tilapia
+                yet, you’re missing out!" </p>
+                <p class="author">- Tom T.</p>
+    </div>
+    
+    <div class="container login-signup">
+        <h2>Get Started Now</h2>
+        <a href="Login Customer.html">Login</a>
+        <a href="Signin Customer.html" class="signup">Sign Up</a>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-item">
+                <a href="tel:+254 703250550" target="_blank"><i class="fas fa-phone"></i>  +254 703250550</a>
+            </div>
+            <div class="footer-item">
+                <a href="https://wa.me/+254 703250550" target="_blank"><i class="fab fa-whatsapp"></i> +254 703250550</a>
+            </div>
+            <div class="footer-item">
+                <a href="mailto:destinymichael941@gmail.com" target="_blank"><i class="fas fa-envelope"></i> destinymichael941@gmail.com</a>
+            </div>
+        </div>
+        <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2023 Bamburi Tilapia Restaurant. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Function to go back to the previous page
+        function goBack() {
+            window.history.back();
+      }
+    </script>
+</body>
+</html>

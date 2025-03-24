@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bamburi Tilapia Restaurant</title>
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">Back</button>
+    <h1 style="color: aqua;">Bamburi Tilapia Restaurant</h1>
+    
+    <h2 style="color: aqua;">Menu</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Meal</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Breakfast -->
+            <tr>
+                <th rowspan="4">Breakfast</th>
+                <td>Pancakes</td>
+                <td>KSH. 400</td>
+                <td><img src="Pancake.jpeg" alt="Pancakes"></td>
+                <td><button class="add-btn" data-name="Pancakes" data-price="400">Add</button></td>
+            </tr>
+            <tr>
+                <td>Omelette</td>
+                <td>KSH. 550</td>
+                <td><img src="omelette.jpeg" alt="Omelette"></td>
+                <td><button class="add-btn" data-name="Omelette" data-price="550">Add</button></td>
+            </tr>
+            <tr>
+                <td>white coffee</td>
+                <td>KSH. 200</td>
+                <td><img src="Drink5.jpeg" alt="white coffee"></td>
+                <td><button class="add-btn" data-name="white coffee" data-price="200">Add</button></td>
+            </tr>
+            <tr>
+                <td>White Tea</td>
+                <td>KSH. 150</td>
+                <td><img src="Drink10.jpeg" alt="White Tea"></td>
+                <td><button class="add-btn" data-name="White Tea" data-price="150">Add</button></td>
+            </tr>
+            <!-- Lunch -->
+            <tr>
+                <th rowspan="3">Lunch</th>
+                <td>Grilled Chicken</td>
+                <td>KSH. 999</td>
+                <td><img src="Grilled Chicken.jpeg" alt="Grilled Chicken"></td>
+                <td><button class="add-btn" data-name="Grilled Chicken" data-price="999">Add</button></td>
+            </tr>
+            <tr>
+                <td>Beef Stew</td>
+                <td>KSH. 669</td>
+                <td><img src="Food5.jpeg" alt="Beef Stew"></td>
+                <td><button class="add-btn" data-name="Beef Stew" data-price="669">Add</button></td>
+            </tr>
+            <tr>
+                <td>French fries with chicken</td>
+                <td>KSH. 850</td>
+                <td><img src="Food6.jpeg" alt="French fries with chicken"></td>
+                <td><button class="add-btn" data-name="French fries with chicken" data-price="850">Add</button></td>
+            </tr>
+            <!-- Supper -->
+            <tr>
+                <th rowspan="3">Supper</th>
+                <td>Steak</td>
+                <td>KSH. 550</td>
+                <td><img src="grilled steak.jpeg" alt="Steak"></td>
+                <td><button class="add-btn" data-name="Steak" data-price="550">Add</button></td>
+            </tr>
+            <tr>
+                <td>Wet Fry Tilapia</td>
+                <td>KSH. 500</td>
+                <td><img src="Food1.jpeg" alt="Wet Fry Tilapia"></td>
+                <td><button class="add-btn" data-name="Wet Fry Tilapia" data-price="500">Add</button></td>
+            </tr>
+            <tr>
+                <td>Grilled Steak</td>
+                <td>KSH. 699</td>
+                <td><img src="grilled steak.jpeg" alt="Grilled Teak"></td>
+                <td><button class="add-btn" data-name="Grilled Steak" data-price="699">Add</button></td>
+            </tr>
+
+            <!-- Snacks -->
+            <tr>
+                <th rowspan="4">Snacks</th>
+                <td>French Fries</td>
+                <td>KSH. 400</td>
+                <td><img src="french fries.jpeg" alt="French Fries"></td>
+                <td><button class="add-btn" data-name="French Fries" data-price="400">Add</button></td>
+            </tr>
+            <tr>
+                <td>Spring Rolls</td>
+                <td>KSH. 250</td>
+                <td><img src="spring rolls.jpeg" alt="Spring Rolls"></td>
+                <td><button class="add-btn" data-name="Spring Rolls" data-price="250">Add</button></td>
+            </tr>
+            <tr>
+                <td>Cheese cake</td>
+                <td>KSH. 2000</td>
+                <td><img src="Cheesecake2.jpeg" alt="Cheese cake"></td>
+                <td><button class="add-btn" data-name="Cheese cake" data-price="2000">Add</button></td>
+            </tr>
+            <tr>
+                <td>Pizza</td>
+                <td>KSH. 3000</td>
+                <td><img src="Food3.jpeg" alt="CPizza"></td>
+                <td><button class="add-btn" data-name="Pizza" data-price="3000">Add</button></td>
+            </tr>
+            <!-- Drinks -->
+            <tr>
+                <th rowspan="2">Drinks</th>
+                <td>Fresh Juice</td>
+                <td>KSH. 150</td>
+                <td><img src="Dink1.jpeg" alt="Fresh Juice"></td>
+                <td><button class="add-btn" data-name="Fresh Juice" data-price="150">Add</button></td>
+            </tr>
+            <tr>
+                <td>Lemonade</td>
+                <td>KSH. 100</td>
+                <td><img src="lemonade.jpeg" alt="Soft Drink"></td>
+                <td><button class="add-btn" data-name="Soft Drink" data-price="100">Add</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 style="color: aqua;">Your Order</h2>
+    <ul id="order-list"></ul>
+    <p class="total-price"><strong>Total:</strong> KSH <span id="total-price">0.00</span></p>
+
+    <div id="buttons">
+        <button class="btn" onclick="placeOrder()">Place Order</button>
+        <button class="btn" onclick="loginCustomer()">Login as Customer</button>
+    </div>
+
+<!-- Confirmation Modal -->
+<div id="confirmation-modal" class="modal">
+    <div class="modal-content">
+        <p>Are you sure you want to place this order?</p>
+        <button onclick="confirmOrder()">Continue</button>
+        <button onclick="closeModal()">Cancel</button>
+    </div>
+</div>
+
+<div id="order-confirmation-modal">
+    <p>Your order has been submitted successfully! You can now proceed to payment.</p>
+    <button onclick="proceedToPayment()">Proceed to Payment</button>
+</div>
+
+<script>
+    function showPopup() {
+        document.getElementById("order-popup").style.display = "block";
+    }
+
+    function hidePopup() {
+        document.getElementById("order-popup").style.display = "none";
+    }
+
+    function submitOrder() {
+        hidePopup();
+        document.getElementById("order-confirmation-modal").style.display = "block";
+    }
+
+    function proceedToPayment() {
+        alert("Redirecting to payment page...");
+        window.location.href = "Payment page.html";
+    }
+</script>
+
+    <script src="menu.js"></script>
+</body>
+</html>

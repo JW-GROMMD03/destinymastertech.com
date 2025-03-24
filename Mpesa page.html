@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Pesa Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            position: relative;
+            max-width: 400px;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+            background-color: translucent;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .container:hover {
+            transform: scale(1.05);
+            animation: rainbow-border 1s infinite;
+        }
+        @keyframes rainbow-border {
+            0% { box-shadow: 0px 0px 10px red; }
+            20% { box-shadow: 0px 0px 10px orange; }
+            40% { box-shadow: 0px 0px 10px yellow; }
+            60% { box-shadow: 0px 0px 10px green; }
+            80% { box-shadow: 0px 0px 10px blue; }
+            100% { box-shadow: 0px 0px 10px violet; }
+        }
+        .back-button {
+            background-color: #007bff;
+             color: white;
+             border: none;
+             padding: -30px -20px;
+             font-size: 16px;
+             cursor: pointer;
+             border-radius: 5px;
+             position: absolute; /* Position the button to be inside the container */
+             top: 0px;       /* Distance from the top */
+             left: 10px;      /* Distance from the left */
+             width: 100px;   /* Set specific width */
+             height: 40px;  /* Set specific height */
+             font-size: 12px; /* Smaller text */
+             padding: 5px;  /* Reduce padding */
+             cursor: pointer;
+             transition: transform 0.2s, background-color 0.2s;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.1);
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .pending-animation {
+            width: 30px;
+            height: 30px;
+            border: 4px solid #007bff;
+            border-top: 4px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="back-button" onclick="history.back()">← Back</button>
+        <h2 style="text-align: center;"> <br>M-Pesa Payment</h2>
+        <form id="mpesaPaymentForm">
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required placeholder="e.g. 254712345678" pattern="^254\d{9}$" title="Enter a valid Kenyan phone number (e.g., 254712345678)">
+            
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" required min="1" placeholder="Enter amount">
+            
+            <label for="accountReference">Account Reference (Optional):</label>
+            <input type="text" id="accountReference" name="accountReference" placeholder="Enter account reference">
+            
+            <label for="transactionDesc">Transaction Description (Optional):</label>
+            <input type="text" id="transactionDesc" name="transactionDesc" placeholder="Enter description">
+            
+            <button type="submit">Pay via M-Pesa</button>
+        </form>
+    </div>
+
+    <div id="popup" class="popup">
+        <div id="popupMessage">
+            <div class="pending-animation"></div>
+            <p>Processing payment...</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("mpesaPaymentForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const phoneNumber = document.getElementById("phoneNumber").value;
+            const amount = document.getElementById("amount").value;
+            if (!phoneNumber || !amount) {
+                alert("Phone number and amount are required!");
+                return;
+            }
+            
+            const popup = document.getElementById("popup");
+            const popupMessage = document.getElementById("popupMessage");
+            popup.style.display = "block";
+            popupMessage.innerHTML = '<div class="pending-animation"></div><p>Processing payment...</p>';
+            
+            setTimeout(() => {
+                popupMessage.innerHTML = '<p class="error">❌ Transaction failed!</p>';
+                setTimeout(() => {
+                    popup.style.display = "none";
+                }, 3000);
+            }, 12000);
+        });
+    </script>
+    <script src="M-Pesa page.js"></script>
+</body>
+</html>

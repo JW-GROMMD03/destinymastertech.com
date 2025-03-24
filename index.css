@@ -1,0 +1,288 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center; 
+    background-image: url('Pool.jpg');
+    
+}
+
+.background-image {
+    height: 100vh;
+    max-width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 50px;
+    background: white;
+    background-color: transparent;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+}
+.navbar a {
+    text-decoration: none;
+    color: black;
+    margin: 0 15px;
+}
+.navbar .buttons a, .hero .buttons a {
+    background-color: purple;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.3s, background-color 0.3s;
+}
+.navbar .buttons a:hover, .hero .buttons a:hover {
+    transform: scale(1.1);
+    background-color: #a32cc4;
+}
+.hero {
+    padding: 50px 20px;
+}
+.hero h1 {
+    font-size: 50px;
+}
+.hero span {
+    color: purple;
+}
+
+.carousel img {
+    width: 100px;
+    margin: 20px;
+    transition: transform 0.5s, filter 0.5s;
+    filter: blur(3px);
+    opacity: 0.7;
+    border-radius: 20px; /* Rounds the corners */
+}
+.carousel img.active {
+    transform: scale(1.5);
+    filter: blur(0px);
+    opacity: 1;
+}
+.carousel img.active:hover {
+    transform: scale(1.7);
+}
+
+.expanded-section {
+    background-color: white; /* Removes background image */
+    padding: 100px 50px;
+    min-height: 80vh; /* Extends the section */
+    position:relative;
+    z-index: 1;
+}
+
+.right-content {
+    flex: 1;
+    transition: transform 0.5s ease-in-out;
+}
+
+.sliding-images {
+    display: flex;
+    justify-content: space-between;
+    overflow-x: hidden;
+    position:fixed;
+    bottom: 0;
+}
+
+ /* Fixed background */
+ .image {
+    margin-top: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)); 
+    background-image: url('Family3.jpeg'); 
+    background-size:cover;/* Keeps the background fixed */
+    background-attachment: fixed;
+}
+
+/* Overlay that moves with the content */
+.overlay {
+    background: rgba(255, 255, 255, 0.5); /* Adjust transparency */
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    position:cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1000;
+}
+
+.overlay-text {
+    color: purple; /* Change text color for visibility */
+    font-size: 24px; /* Adjust size */
+    font-weight: bold;
+    text-align: center; /* Center text */
+    position: relative; /* Ensures it stays inside the overlay */
+    z-index: 4; /* Keeps text above the background */
+    content: "This is a transparent text ";
+}
+
+
+
+/* Faded bottom edge effect */
+.overlay::after {
+    content: "This is a transparent text";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90px; /* Adjust height of the faded effect */
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%);
+}
+
+/* Content box */
+.content {
+    max-width: 50%;
+    margin: auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8); /* Example semi-transparent content box */
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    text-align: center;
+    color: #333;
+}
+.opening-hours {
+    margin-top: 20px;
+}
+.opening-hours h2 {
+    color: #555;
+    margin-bottom: 10px;
+}
+.opening-hours p {
+    font-size: 18px;
+    color: #333;
+    margin: 5px 0;
+}
+
+.container2 {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    text-align: center;
+    color: #333;
+}
+.review {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+.review:last-child {
+    border-bottom: none;
+}
+.review h2 {
+    color: #555;
+    margin-bottom: 10px;
+}
+.review p {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+}
+.review .rating {
+    font-size: 24px;
+    color: #ffcc00;
+}
+.review .author {
+    font-weight: bold;
+    color: #777;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px 15px;
+    background-color: aquamarine;
+    border-top: 1px solid #ddd;
+    width: 100%;
+    margin-top: auto;
+}
+.footer img {
+    width: 120px;
+    margin-bottom: 10px;
+    border-radius: 50px;;
+}
+
+.footer p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+    line-height: 1.5;
+}
+.footer-links {
+    margin-top: 5px;
+}
+.footer a {
+    font-size: 14px;
+    color: #0073e6;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease-in-out;
+}
+.footer a:hover {
+    text-decoration: underline;
+    color: #005bb5;
+}
+@media (max-width: 600px) {
+    .footer a {
+        display: block;
+        margin: 5px 0;
+    }
+}
+
+.container1 {
+    position: absolute; /* Positions the logo absolutely */
+    top: 60px; /* Adjust this value to place it just below the nav bar */
+    left: 20px; /* Adjust this value to move it to the left */
+}
+.bamburi{
+    margin-bottom: 10px;
+}
+.logo img {
+    width: 120px;
+    margin-bottom: 10px;
+    border-radius: 50px;
+    margin-top: 20px;
+    margin-left: 5px;
+    height: auto;
+    justify-content: left;
+   animation: spin 2s infinite linear;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
