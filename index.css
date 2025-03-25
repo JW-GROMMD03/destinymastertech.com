@@ -5,7 +5,9 @@ body {
     padding: 0;
     text-align: center; 
     background-image: url('Pool.jpg');
-    
+    background-position: center;
+    min-height: 100vh;
+    line-height: 1.6;
 }
 
 .background-image {
@@ -18,12 +20,14 @@ body {
 
 
 .navbar {
+    flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
-    padding: 15px 50px;
+    padding: 1 rem;
     background: white;
     background-color: transparent;
     box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+    position: relative;
 }
 .navbar a {
     text-decoration: none;
@@ -35,6 +39,8 @@ body {
     color: white;
     padding: 15px 30px;
     border: none;
+    display: flex;
+    gap: 1rem;
     cursor: pointer;
     font-size: 18px;
     margin: 10px;
@@ -97,6 +103,7 @@ body {
 
  /* Fixed background */
  .image {
+    display:flex;
     margin-top: 0;
     margin: 0;
     padding: 0;
@@ -106,6 +113,10 @@ body {
     background-image: url('Family3.jpeg'); 
     background-size:cover;/* Keeps the background fixed */
     background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    line-height: 1.6;
 }
 
 /* Overlay that moves with the content */
@@ -157,6 +168,8 @@ body {
 }
 
 .container {
+    display: flex;
+    align-items: center;
     max-width: 600px;
     margin: 0 auto;
     background-color: transparent;
@@ -269,9 +282,9 @@ h1 {
     margin-bottom: 10px;
 }
 .logo img {
-    width: 120px;
+    width: 80px;
     margin-bottom: 10px;
-    border-radius: 50px;
+    border-radius: 50%;
     margin-top: 20px;
     margin-left: 5px;
     height: auto;
@@ -284,5 +297,51 @@ h1 {
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .links, .buttons {
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+    
+    .carousel-container img {
+        height: 200px;
+    }
+    
+    .left-text h1, .left-text h2 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.2rem;
+    }
+    
+    .carousel-container img {
+        height: 150px;
+    }
+    
+    .buttons a {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        align-items: center;
     }
 }
